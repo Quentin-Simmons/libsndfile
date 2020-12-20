@@ -39,8 +39,8 @@ set (CPACK_PACKAGE_VERSION_FULL "${PROJECT_VERSION}${CPACK_PACKAGE_VERSION_STAGE
 #include (GNUInstallDirs)
 #include (FeatureSummary)
 #include (CMakeDependentOption)
-# include (CTest)
-# include (CheckCCompilerFlag)
+#include (CTest)
+#include (CheckCCompilerFlag)
 
 #
 # Options
@@ -110,25 +110,27 @@ set (ENABLE_EXPERIMENTAL_CODE ${ENABLE_EXPERIMENTAL})
 set (HAVE_SPEEX ${ENABLE_EXPERIMENTAL})
 set (HAVE_OPUS ${ENABLE_EXPERIMENTAL})
 
-#add_feature_info (BUILD_SHARED_LIBS BUILD_SHARED_LIBS "build shared libraries")
-#add_feature_info (ENABLE_EXTERNAL_LIBS ENABLE_EXTERNAL_LIBS "enable FLAC, Vorbis, and Opus codecs")
-#add_feature_info (ENABLE_EXPERIMENTAL ENABLE_EXPERIMENTAL "enable experimental code")
-#add_feature_info (BUILD_TESTING BUILD_TESTING "build tests")
-#add_feature_info (BUILD_REGTEST BUILD_REGTEST "build regtest")
-#add_feature_info (ENABLE_CPACK ENABLE_CPACK "enable CPack support")
-#add_feature_info (ENABLE_CPU_CLIP ENABLE_CPU_CLIP "Enable tricky cpu specific clipper")
-#add_feature_info (ENABLE_BOW_DOCS ENABLE_BOW_DOCS "enable black-on-white html docs")
-#add_feature_info (ENABLE_PACKAGE_CONFIG ENABLE_PACKAGE_CONFIG "generate and install package config file")
-#add_feature_info (INSTALL_PKGCONFIG_MODULE INSTALL_PKGCONFIG_MODULE "generate and install pkg-config module")
-#add_feature_info (INSTALL_MANPAGES INSTALL_MANPAGES "install man pages for programs")
+
+#[[
+add_feature_info (BUILD_SHARED_LIBS BUILD_SHARED_LIBS "build shared libraries")
+add_feature_info (ENABLE_EXTERNAL_LIBS ENABLE_EXTERNAL_LIBS "enable FLAC, Vorbis, and Opus codecs")
+add_feature_info (ENABLE_EXPERIMENTAL ENABLE_EXPERIMENTAL "enable experimental code")
+add_feature_info (BUILD_TESTING BUILD_TESTING "build tests")
+add_feature_info (BUILD_REGTEST BUILD_REGTEST "build regtest")
+add_feature_info (ENABLE_CPACK ENABLE_CPACK "enable CPack support")
+add_feature_info (ENABLE_CPU_CLIP ENABLE_CPU_CLIP "Enable tricky cpu specific clipper")
+add_feature_info (ENABLE_BOW_DOCS ENABLE_BOW_DOCS "enable black-on-white html docs")
+add_feature_info (ENABLE_PACKAGE_CONFIG ENABLE_PACKAGE_CONFIG "generate and install package config file")
+add_feature_info (INSTALL_PKGCONFIG_MODULE INSTALL_PKGCONFIG_MODULE "generate and install pkg-config module")
+add_feature_info (INSTALL_MANPAGES INSTALL_MANPAGES "install man pages for programs")
 if (WIN32 AND BUILD_SHARED_LIBS)
-#	add_feature_info (ENABLE_COMPATIBLE_LIBSNDFILE_NAME ENABLE_COMPATIBLE_LIBSNDFILE_NAME "Set DLL name to libsndfile-1.dll (canonical name), sndfile.dll otherwise")
+	add_feature_info (ENABLE_COMPATIBLE_LIBSNDFILE_NAME ENABLE_COMPATIBLE_LIBSNDFILE_NAME "Set DLL name to libsndfile-1.dll (canonical name), sndfile.dll otherwise")
 endif ()
 
 if (HAVE_MSSE2_COMPILER_FLAG)
-#	add_feature_info (ENABLE_SSE2 ENABLE_SSE2 "add SSE2 compiler flag")
+	add_feature_info (ENABLE_SSE2 ENABLE_SSE2 "add SSE2 compiler flag")
 endif ()
-
+]]
 
 
 
