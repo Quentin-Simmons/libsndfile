@@ -39,21 +39,24 @@ set (CPACK_PACKAGE_VERSION_FULL "${PROJECT_VERSION}${CPACK_PACKAGE_VERSION_STAGE
 include (GNUInstallDirs)
 include (FeatureSummary)
 include (CMakeDependentOption)
-include (CTest)
-include (CheckCCompilerFlag)
+# include (CTest)
+# include (CheckCCompilerFlag)
 
 #
 # Options
 #
+
+
+set (BUILD_TESTING OFF)
 
 option (BUILD_SHARED_LIBS "Build shared libraries" OFF)
 if (BUILD_SHARED_LIBS AND BUILD_TESTING)
 	set (BUILD_TESTING OFF)
 	message ("Build testing required static libraries. To prevent build errors BUILD_TESTING disabled.")
 endif ()
-option (BUILD_PROGRAMS "Build programs" ON)
-option (BUILD_EXAMPLES "Build examples" ON)
-option (ENABLE_CPACK "Enable CPack support" ON)
+option (BUILD_PROGRAMS "Build programs" OFF)
+option (BUILD_EXAMPLES "Build examples" OFF)
+option (ENABLE_CPACK "Enable CPack support" OFF)
 option (ENABLE_EXPERIMENTAL "Enable experimental code" OFF)
 option (ENABLE_BOW_DOCS "Enable black-on-white html docs" OFF)
 if (MSVC AND (DEFINED ENABLE_STATIC_RUNTIME))
@@ -61,8 +64,8 @@ if (MSVC AND (DEFINED ENABLE_STATIC_RUNTIME))
 elseif (MINGW)
 	option (ENABLE_STATIC_RUNTIME "Enable static runtime" OFF)
 endif ()
-option (ENABLE_PACKAGE_CONFIG "Generate and install package config file" ON)
-option (INSTALL_PKGCONFIG_MODULE "Generate and install pkg-config module" ON)
+option (ENABLE_PACKAGE_CONFIG "Generate and install package config file" OFF)
+option (INSTALL_PKGCONFIG_MODULE "Generate and install pkg-config module" OFF)
 
 list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 if (CMAKE_VERSION VERSION_LESS 3.14)
@@ -73,18 +76,18 @@ endif ()
 # Setup definitions
 #
 
-include(SndFileChecks)
+#include(SndFileChecks)
 
 
-cmake_dependent_option (BUILD_REGTEST "Build regtest" ON "SQLITE3_FOUND" OFF)
-cmake_dependent_option (ENABLE_EXTERNAL_LIBS "Enable FLAC, Vorbis, and Opus codecs" ON "Vorbis_FOUND;FLAC_FOUND;OPUS_FOUND" OFF)
-cmake_dependent_option (ENABLE_CPU_CLIP "Enable tricky cpu specific clipper" ON "CPU_CLIPS_POSITIVE;CPU_CLIPS_NEGATIVE" OFF)
+cmake_dependent_option (BUILD_REGTEST "Build regtest" OFF "SQLITE3_FOUND" OFF)
+cmake_dependent_option (ENABLE_EXTERNAL_LIBS "Enable FLAC, Vorbis, and Opus codecs" OFF "Vorbis_FOUND;FLAC_FOUND;OPUS_FOUND" OFF)
+cmake_dependent_option (ENABLE_CPU_CLIP "Enable tricky cpu specific clipper" OFF "CPU_CLIPS_POSITIVE;CPU_CLIPS_NEGATIVE" OFF)
 if (NOT ENABLE_CPU_CLIP)
 	set (CPU_CLIPS_POSITIVE FALSE)
 	set (CPU_CLIPS_NEGATIVE FALSE)
 endif ()
 cmake_dependent_option (ENABLE_COMPATIBLE_LIBSNDFILE_NAME "Set DLL name to libsndfile-1.dll (canonical name), sndfile.dll otherwise" OFF "WIN32;BUILD_SHARED_LIBS" OFF)
-cmake_dependent_option (INSTALL_MANPAGES "Install man pages for programs" ON "BUILD_PROGRAMS" OFF)
+cmake_dependent_option (INSTALL_MANPAGES "Install man pages for programs" OFF "BUILD_PROGRAMS" OFF)
 
 if (NOT MSVC)
 	if (CPU_IS_X86)
